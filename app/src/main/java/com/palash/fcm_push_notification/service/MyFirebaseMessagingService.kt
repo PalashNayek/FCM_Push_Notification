@@ -18,7 +18,6 @@ const val channelName = "com.palash.fcm_push_notification"
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
-    //1. generate the notification
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         if (remoteMessage.notification!=null){
             generateNotification(remoteMessage.notification!!.title!!, remoteMessage.notification!!.body!!)
@@ -33,7 +32,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         return remoteView
     }
 
-    fun generateNotification(title: String, message: String) {
+    private fun generateNotification(title: String, message: String) {
 
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -60,10 +59,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
 
         notificationManager.notify(0, builder.build())
-
     }
-    //2. attach the notification with the custom layout
-    //3. show the notification
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
